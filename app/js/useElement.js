@@ -47,5 +47,5 @@ const call = (element) => {
 }
 
 const getLoadTime = (elements) => {
-    return elements.length * 60
+    return elements.length * 75
 }

@@ -1,6 +1,9 @@
 const elements = [
-    'header',
+    'timerButton',
     'timer',
+    'headerContainer',
+    'headerInput',
+    'mainHeader',
 ];
 
 const loader = new Loader();
@@ -10,9 +13,9 @@ const sleep = (ms) => {
 }
 
 assignElements(elements, async () => {
-    console.log('All elements assigned');
     loader.show()
     await sleep(getLoadTime(elements));
     loader.hide();
-    call(header())
+    console.log('All elements assigned');
+    call(mainHeader.use());
 });    
