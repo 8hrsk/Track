@@ -6,6 +6,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: rgb(148, 148, 148);
 }
 
 a {
@@ -14,10 +15,6 @@ a {
 
 ul {
     list-style: none;
-}
-
-#root {
-    width: 100%;
 }
 
 .loader {

@@ -53,7 +53,7 @@ class Template {
                 ${this.js}
             </script>
         `
-        // document.body.insertAdjacentHTML('beforeend', js);
+
         return js
     }
 
@@ -72,11 +72,41 @@ class Template {
         document.getElementById(this.id).appendChild(script);
     }
     
-    async render() {
+    async rendered() {
+        const sleep = (ms) => {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        let element = null;
+
+        while (element === null) {
+            element = document.getElementById(this.id);
+            await sleep(15)
+        }
+
+        const script = document.createElement('script');
+        script.innerHTML = this.js;
+
+        element.appendChild(script);
+    }
+
+    use() {
+        this.rendered()
         return this.html
     }
 
-    async use() {
-        return this.html
+    isRendered() {
+        const sleep = (ms) => {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        let element = null;
+
+        while (element === null) {
+            element = document.getElementById(this.id);
+            sleep(15)
+        }
+
+        return true
     }
 }
