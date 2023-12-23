@@ -1,6 +1,7 @@
 const elements = [
     'header',
     'timer',
+    'button'
 ];
 
 const loader = new Loader();

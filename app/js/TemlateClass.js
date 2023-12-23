@@ -1,9 +1,7 @@
 class Template {
-    constructor(htmlString, cssString) {
-        this.id = this.generate(10);
-        this.html = this.validateHtml(htmlString);
+    constructor() {
+        this.id = 'template' + this.generate(10);
     }
-
 
     /**
      * @description Generate random string
@@ -26,32 +24,59 @@ class Template {
         return generatorResult
     }
 
-    validateHtml(htmlString) {
-        if (typeof htmlString !== 'string') {
-            console.error('Invalid html string given');
+    validate(string) {
+        if (typeof string !== 'string') {
+            console.error('Invalid data string given : ', string);
             return false
         }
 
-        return htmlString
+        return string
     }
 
-    renderAbsolute() {
-        document.body.insertAdjacentHTML('beforeend', this.htmlString);
-    }
-
-    renderRelative() {
-        return this.html
-    }
-
-    setCss(cssString) {
+    /**
+     * @description Set css to element
+     * @param {string} css 
+     */
+    setCss() {
         const css = `
             <style>
-                #${this.id} {
-                    ${cssString}
-                }
+                ${this.css}
             </style>
         `
 
         document.body.insertAdjacentHTML('beforeend', css);
+    }
+
+    setJs() {
+        const js = `
+            <script>
+                ${this.js}
+            </script>
+        `
+        // document.body.insertAdjacentHTML('beforeend', js);
+        return js
+    }
+
+    create({ html }, { css }, { js }) {
+        this.html = this.validate(html);
+        this.css = this.validate(css);
+        this.js = this.validate(js);
+        // this.setJs(this.js);
+        this.setCss(this.css)
+    }
+
+    renderAbsolute() {
+        document.body.insertAdjacentHTML('beforeend', this.html);
+        const script = document.createElement('script');
+        script.innerHTML = this.js;
+        document.getElementById(this.id).appendChild(script);
+    }
+    
+    async render() {
+        return this.html
+    }
+
+    async use() {
+        return this.html
     }
 }
