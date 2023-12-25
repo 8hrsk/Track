@@ -91,7 +91,6 @@ class Template {
     }
 
     use() {
-        this.rendered()
         return this.html
     }
 
@@ -104,9 +103,12 @@ class Template {
 
         while (element === null) {
             element = document.getElementById(this.id);
-            sleep(15)
         }
 
         return true
+    }
+
+    getRawScript() {
+        return this.js
     }
 }

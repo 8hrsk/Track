@@ -29,7 +29,10 @@ timerButton.create(
                 if (isActive === false) {
                     isActive = true;
                     timerButtonImage${timerButton.id}.src = '../src/Stop.png';
+                    const task = document.getElementById(headerInput.id).value;
+                    const now = new Date();
 
+                    startTimer(task, now.toISOString());
                 } else {
                     isActive = false;
                     timerButtonImage${timerButton.id}.src = '../src/Start.png';

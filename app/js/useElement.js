@@ -24,12 +24,13 @@ const useElement = (element) => {
     return false
 }
 
-
 const assignElements = (elementsArray, callback) => {
     if (typeof elementsArray !== 'object') {
         console.error(`Invalid data given`);
         return false
     }
+
+    let assignedElements = [];
 
     elementsArray.forEach((element) => {
         const includeResult = useElement(element);
@@ -37,9 +38,13 @@ const assignElements = (elementsArray, callback) => {
         if (includeResult === false) {
             console.error(`Element "${element}" not found.`);
         }
+
+        if (includeResult === true) {
+            assignedElements.push(element);
+        }
     })
 
-    callback();
+    callback(assignedElements);
 }
 
 const call = (element) => {
@@ -48,4 +53,11 @@ const call = (element) => {
 
 const getLoadTime = (elements) => {
     return elements.length * 75
+}
+
+const renderScript = (script) => {
+    const scriptToAppend = document.createElement('script');
+    scriptToAppend.innerHTML = script;
+
+    document.body.appendChild(scriptToAppend);
 }
